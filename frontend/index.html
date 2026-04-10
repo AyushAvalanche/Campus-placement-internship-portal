@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campus Placement & Internship Portal | DBMS Project</title>
+  <meta name="description" content="University Campus Placement & Internship Portal — DBMS project covering ER diagrams, relational model, normalization, SQL queries and live demo." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+</head>
+<body>
+
+  <header class="app-header">
+    <div class="header-inner">
+      <div class="branding">
+        <div class="logo"><i data-lucide="graduation-cap"></i></div>
+        <div>
+          <h1>Campus Placement &amp; Internship Portal</h1>
+          <p class="subtitle">DBMS Project — University Campus Recruitment System</p>
+        </div>
+      </div>
+      <div class="header-tags">
+        <span class="htag">MySQL</span>
+        <span class="htag">Node.js</span>
+        <span class="htag">Express</span>
+      </div>
+    </div>
+  </header>
+
+  <nav class="main-nav" id="main-nav">
+    <div class="nav-inner">
+      <button class="nav-btn active" data-section="storyline"><span class="nnum">01</span><span class="nlabel">Storyline</span></button>
+      <button class="nav-btn" data-section="db-design"><span class="nnum">02</span><span class="nlabel">DB Design</span></button>
+      <button class="nav-btn" data-section="er-diagram"><span class="nnum">03</span><span class="nlabel">ER Diagram</span></button>
+      <button class="nav-btn" data-section="relational-model"><span class="nnum">04</span><span class="nlabel">Relational Model</span></button>
+      <button class="nav-btn" data-section="normalization"><span class="nnum">05</span><span class="nlabel">Normalization</span></button>
+      <button class="nav-btn" data-section="sql-queries"><span class="nnum">06</span><span class="nlabel">SQL Queries</span></button>
+      <button class="nav-btn" data-section="project-demo"><span class="nnum">07</span><span class="nlabel">Project Demo</span></button>
+      <button class="nav-btn" data-section="self-learning"><span class="nnum">08</span><span class="nlabel">Self-Learning</span></button>
+      <button class="nav-btn" data-section="learnings"><span class="nnum">09</span><span class="nlabel">Learnings</span></button>
+      <button class="nav-btn" data-section="challenges"><span class="nnum">10</span><span class="nlabel">Challenges</span></button>
+      <button class="nav-btn" data-section="conclusion"><span class="nnum">11</span><span class="nlabel">Conclusion</span></button>
+    </div>
+  </nav>
+
+  <main class="app-main">
+
+    <!-- ===== 1. STORYLINE ===== -->
+    <section class="sec-panel active" id="storyline">
+      <div class="sec-hero">
+        <div class="sec-badge">01</div>
+        <h2>Storyline</h2>
+        <p class="sec-lead">The motivation and vision behind this DBMS project</p>
+      </div>
+      <div class="cg-3">
+        <div class="card story-card">
+          <div class="sicon"><i data-lucide="target"></i></div>
+          <h3>The Problem</h3>
+          <p>Campus placement processes at universities are typically handled through spreadsheets, emails, and manual coordination. This leads to data inconsistency, missed deadlines, and difficulty matching eligible students to the right companies.</p>
+        </div>
+        <div class="card story-card">
+          <div class="sicon"><i data-lucide="lightbulb"></i></div>
+          <h3>Our Solution</h3>
+          <p>We designed a relational database system — <strong>CampusPlacementPortal</strong> — that digitises the entire recruitment lifecycle. Student profiles, job postings, applications, and interview outcomes are tracked in one interconnected MySQL database.</p>
+        </div>
+        <div class="card story-card">
+          <div class="sicon"><i data-lucide="globe"></i></div>
+          <h3>Real-World Impact</h3>
+          <p>Placement coordinators can see which student applied where, filter candidates by CGPA, track interview schedules, and view statistics in real time through a live web interface backed by a REST API.</p>
+        </div>
+      </div>
+      <div class="card flow-card">
+        <h3>System Flow</h3>
+        <div class="flow-row">
+          <div class="flow-step"><div class="ficon"><i data-lucide="user-check"></i></div><div class="flabel">Student Registers</div></div>
+          <div class="farrow">→</div>
+          <div class="flow-step"><div class="ficon"><i data-lucide="building-2"></i></div><div class="flabel">Company Posts Job</div></div>
+          <div class="farrow">→</div>
+          <div class="flow-step"><div class="ficon"><i data-lucide="file-text"></i></div><div class="flabel">Student Applies</div></div>
+          <div class="farrow">→</div>
+          <div class="flow-step"><div class="ficon"><i data-lucide="calendar-check"></i></div><div class="flabel">Interview Scheduled</div></div>
+          <div class="farrow">→</div>
+          <div class="flow-step"><div class="ficon"><i data-lucide="badge-check"></i></div><div class="flabel">Placement Confirmed</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 2. DATABASE DESIGN ===== -->
+    <section class="sec-panel" id="db-design">
+      <div class="sec-hero">
+        <div class="sec-badge">02</div>
+        <h2>Components of Database Design</h2>
+        <p class="sec-lead">Building blocks used to design the CampusPlacementPortal database</p>
+      </div>
+      <div class="cg-2">
+        <div class="card">
+          <h3><i data-lucide="table-2" class="h3-icon"></i> Entities (Tables)</h3>
+          <ul class="slist">
+            <li><strong>Students</strong> — Academic profiles of candidates</li>
+            <li><strong>Companies</strong> — Recruiting organisations</li>
+            <li><strong>Job_Postings</strong> — Open roles with eligibility criteria</li>
+            <li><strong>Applications</strong> — Student–job linkage records</li>
+            <li><strong>Interviews</strong> — Scheduled interview outcomes</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><i data-lucide="tag" class="h3-icon"></i> Attributes</h3>
+          <ul class="slist">
+            <li><strong>Simple</strong> — name, email, cgpa</li>
+            <li><strong>Multi-valued</strong> — skills (comma-separated)</li>
+            <li><strong>Optional (NULL)</strong> — resume_link, skills</li>
+            <li><strong>Derived</strong> — placement year from graduation_year</li>
+            <li><strong>Composite</strong> — location (city + state)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><i data-lucide="key" class="h3-icon"></i> Keys</h3>
+          <ul class="slist">
+            <li><span class="ktag pk">PK</span> AUTO_INCREMENT INT — student_id, company_id…</li>
+            <li><span class="ktag fk">FK</span> company_id in Job_Postings → Companies</li>
+            <li><span class="ktag fk">FK</span> student_id, job_id in Applications</li>
+            <li><span class="ktag uq">UQ</span> email, hr_email, company_name</li>
+            <li><span class="ktag chk">CHK</span> cgpa BETWEEN 0 AND 10</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><i data-lucide="git-merge" class="h3-icon"></i> Relationships</h3>
+          <ul class="slist">
+            <li><strong>1 : N</strong> — One company posts many jobs</li>
+            <li><strong>1 : N</strong> — One student submits many applications</li>
+            <li><strong>1 : N</strong> — One job receives many applications</li>
+            <li><strong>1 : 1</strong> — One application has one interview record</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><i data-lucide="shield-check" class="h3-icon"></i> Integrity Constraints</h3>
+          <ul class="slist">
+            <li><strong>Entity Integrity</strong> — PKs are always NOT NULL</li>
+            <li><strong>Referential Integrity</strong> — FK must reference valid PK</li>
+            <li><strong>Domain Integrity</strong> — CHECK on cgpa, min_cgpa</li>
+            <li><strong>Default</strong> — status DEFAULT 'Applied'</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3><i data-lucide="settings" class="h3-icon"></i> Design Principles</h3>
+          <ul class="slist">
+            <li><strong>Single Responsibility</strong> — Each table = one entity</li>
+            <li><strong>Normalisation</strong> — Up to 3NF to remove redundancy</li>
+            <li><strong>Scalability</strong> — AUTO_INCREMENT PKs for growth</li>
+            <li><strong>JOINs over duplication</strong> — FK references instead of copying data</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 3. ER DIAGRAM ===== -->
+    <section class="sec-panel" id="er-diagram">
+      <div class="sec-hero">
+        <div class="sec-badge">03</div>
+        <h2>Entity Relationship Diagram</h2>
+        <p class="sec-lead">Visual representation of all entities and their relationships</p>
+      </div>
+      <div class="card er-card">
+        <svg viewBox="0 0 900 560" xmlns="http://www.w3.org/2000/svg" class="er-svg">
+          <defs>
+            <marker id="arr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+              <polygon points="0 0,10 3.5,0 7" fill="#6366f1"/>
+            </marker>
+            <filter id="sh"><feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(0,0,0,0.10)"/></filter>
+          </defs>
+          <!-- STUDENTS -->
+          <g filter="url(#sh)">
+            <rect x="20" y="20" width="195" height="215" rx="10" fill="#eef2ff" stroke="#6366f1" stroke-width="2"/>
+            <rect x="20" y="20" width="195" height="38" rx="10" fill="#6366f1"/>
+            <rect x="20" y="48" width="195" height="10" fill="#6366f1"/>
+            <text x="118" y="45" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Inter,sans-serif">STUDENTS</text>
+            <text x="36" y="80"  fill="#4338ca" font-size="11" font-family="Inter,sans-serif" font-weight="600">[PK] student_id</text>
+            <text x="36" y="98"  fill="#374151" font-size="11" font-family="Inter,sans-serif">   name</text>
+            <text x="36" y="115" fill="#374151" font-size="11" font-family="Inter,sans-serif">   email (UNIQUE)</text>
+            <text x="36" y="132" fill="#374151" font-size="11" font-family="Inter,sans-serif">   branch</text>
+            <text x="36" y="149" fill="#374151" font-size="11" font-family="Inter,sans-serif">   cgpa</text>
+            <text x="36" y="166" fill="#374151" font-size="11" font-family="Inter,sans-serif">   graduation_year</text>
+            <text x="36" y="183" fill="#374151" font-size="11" font-family="Inter,sans-serif">   skills</text>
+            <text x="36" y="200" fill="#374151" font-size="11" font-family="Inter,sans-serif">   resume_link</text>
+          </g>
+          <!-- COMPANIES -->
+          <g filter="url(#sh)">
+            <rect x="685" y="20" width="195" height="175" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+            <rect x="685" y="20" width="195" height="38" rx="10" fill="#22c55e"/>
+            <rect x="685" y="48" width="195" height="10" fill="#22c55e"/>
+            <text x="783" y="45" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Inter,sans-serif">COMPANIES</text>
+            <text x="701" y="80"  fill="#15803d" font-size="11" font-family="Inter,sans-serif" font-weight="600">[PK] company_id</text>
+            <text x="701" y="98"  fill="#374151" font-size="11" font-family="Inter,sans-serif">   company_name (UNIQUE)</text>
+            <text x="701" y="115" fill="#374151" font-size="11" font-family="Inter,sans-serif">   industry</text>
+            <text x="701" y="132" fill="#374151" font-size="11" font-family="Inter,sans-serif">   location</text>
+            <text x="701" y="149" fill="#374151" font-size="11" font-family="Inter,sans-serif">   hr_email (UNIQUE)</text>
+          </g>
+          <!-- JOB_POSTINGS -->
+          <g filter="url(#sh)">
+            <rect x="685" y="295" width="195" height="175" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+            <rect x="685" y="295" width="195" height="38" rx="10" fill="#f97316"/>
+            <rect x="685" y="323" width="195" height="10" fill="#f97316"/>
+            <text x="783" y="320" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Inter,sans-serif">JOB_POSTINGS</text>
+            <text x="701" y="355" fill="#c2410c" font-size="11" font-family="Inter,sans-serif" font-weight="600">[PK] job_id</text>
+            <text x="701" y="373" fill="#9a3412" font-size="11" font-family="Inter,sans-serif" font-style="italic">[FK] company_id</text>
+            <text x="701" y="391" fill="#374151" font-size="11" font-family="Inter,sans-serif">   role</text>
+            <text x="701" y="408" fill="#374151" font-size="11" font-family="Inter,sans-serif">   package_lpa</text>
+            <text x="701" y="425" fill="#374151" font-size="11" font-family="Inter,sans-serif">   min_cgpa / job_type</text>
+          </g>
+          <!-- APPLICATIONS -->
+          <g filter="url(#sh)">
+            <rect x="353" y="195" width="195" height="175" rx="10" fill="#fdf4ff" stroke="#a855f7" stroke-width="2"/>
+            <rect x="353" y="195" width="195" height="38" rx="10" fill="#a855f7"/>
+            <rect x="353" y="223" width="195" height="10" fill="#a855f7"/>
+            <text x="451" y="220" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Inter,sans-serif">APPLICATIONS</text>
+            <text x="369" y="255" fill="#7e22ce" font-size="11" font-family="Inter,sans-serif" font-weight="600">[PK] application_id</text>
+            <text x="369" y="273" fill="#6b21a8" font-size="11" font-family="Inter,sans-serif" font-style="italic">[FK] student_id</text>
+            <text x="369" y="291" fill="#6b21a8" font-size="11" font-family="Inter,sans-serif" font-style="italic">[FK] job_id</text>
+            <text x="369" y="309" fill="#374151" font-size="11" font-family="Inter,sans-serif">   status</text>
+            <text x="369" y="327" fill="#374151" font-size="11" font-family="Inter,sans-serif">   applied_date</text>
+          </g>
+          <!-- INTERVIEWS -->
+          <g filter="url(#sh)">
+            <rect x="353" y="435" width="195" height="105" rx="10" fill="#fff1f2" stroke="#ef4444" stroke-width="2"/>
+            <rect x="353" y="435" width="195" height="38" rx="10" fill="#ef4444"/>
+            <rect x="353" y="463" width="195" height="10" fill="#ef4444"/>
+            <text x="451" y="460" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Inter,sans-serif">INTERVIEWS</text>
+            <text x="369" y="493" fill="#991b1b" font-size="11" font-family="Inter,sans-serif" font-weight="600">[PK] interview_id</text>
+            <text x="369" y="511" fill="#7f1d1d" font-size="11" font-family="Inter,sans-serif" font-style="italic">[FK] application_id</text>
+            <text x="369" y="529" fill="#374151" font-size="11" font-family="Inter,sans-serif">   date / mode / result</text>
+          </g>
+          <!-- Students → Applications -->
+          <line x1="215" y1="128" x2="353" y2="270" stroke="#6366f1" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+          <text x="255" y="188" fill="#6366f1" font-size="11" font-weight="700" font-family="Inter">1:N</text>
+          <!-- Companies → Jobs -->
+          <line x1="783" y1="195" x2="783" y2="295" stroke="#22c55e" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+          <text x="793" y="252" fill="#22c55e" font-size="11" font-weight="700" font-family="Inter">1:N</text>
+          <!-- Jobs → Applications -->
+          <line x1="685" y1="383" x2="548" y2="305" stroke="#f97316" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+          <text x="617" y="330" fill="#f97316" font-size="11" font-weight="700" font-family="Inter">1:N</text>
+          <!-- Applications → Interviews -->
+          <line x1="451" y1="370" x2="451" y2="435" stroke="#a855f7" stroke-width="2" stroke-dasharray="6,3" marker-end="url(#arr)"/>
+          <text x="461" y="410" fill="#a855f7" font-size="11" font-weight="700" font-family="Inter">1:1</text>
+        </svg>
+      </div>
+      <div class="cg-3 mt1">
+        <div class="card legend-row"><div class="ldot" style="background:#6366f1"></div><div><strong>Students ↔ Applications</strong><p class="sm">One student → many applications (1:N)</p></div></div>
+        <div class="card legend-row"><div class="ldot" style="background:#22c55e"></div><div><strong>Companies ↔ Job_Postings</strong><p class="sm">One company → many jobs (1:N)</p></div></div>
+        <div class="card legend-row"><div class="ldot" style="background:#f97316"></div><div><strong>Job_Postings ↔ Applications</strong><p class="sm">One job → many applications (1:N)</p></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 4. RELATIONAL MODEL ===== -->
+    <section class="sec-panel" id="relational-model">
+      <div class="sec-hero">
+        <div class="sec-badge">04</div>
+        <h2>Relational Model</h2>
+        <p class="sec-lead">Schema of all five tables with keys, types, and constraints</p>
+      </div>
+
+      <div class="schema-block">
+        <div class="sh students-h"><span class="sn">Students</span><span class="st">Entity Table</span></div>
+        <div class="sa">
+          <div class="ar pk"><span class="ak">PK</span><span class="an">student_id</span><span class="at">INT AUTO_INCREMENT</span><span class="ac">Primary identifier</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">name</span><span class="at">VARCHAR(50) NOT NULL</span><span class="ac"></span></div>
+          <div class="ar uk"><span class="ak">UQ</span><span class="an">email</span><span class="at">VARCHAR(100) UNIQUE NOT NULL</span><span class="ac">No duplicate emails</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">branch</span><span class="at">VARCHAR(50) NOT NULL</span><span class="ac"></span></div>
+          <div class="ar chk"><span class="ak">CHK</span><span class="an">cgpa</span><span class="at">DECIMAL(3,2)</span><span class="ac">BETWEEN 0 AND 10</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">graduation_year</span><span class="at">INT NOT NULL</span><span class="ac"></span></div>
+          <div class="ar"><span class="ak"></span><span class="an">skills</span><span class="at">VARCHAR(200)</span><span class="ac">Optional</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">resume_link</span><span class="at">VARCHAR(200)</span><span class="ac">Optional</span></div>
+        </div>
+      </div>
+
+      <div class="schema-block">
+        <div class="sh companies-h"><span class="sn">Companies</span><span class="st">Entity Table</span></div>
+        <div class="sa">
+          <div class="ar pk"><span class="ak">PK</span><span class="an">company_id</span><span class="at">INT AUTO_INCREMENT</span><span class="ac"></span></div>
+          <div class="ar uk"><span class="ak">UQ</span><span class="an">company_name</span><span class="at">VARCHAR(100) UNIQUE NOT NULL</span><span class="ac">No duplicates</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">industry</span><span class="at">VARCHAR(50)</span><span class="ac"></span></div>
+          <div class="ar"><span class="ak"></span><span class="an">location</span><span class="at">VARCHAR(100)</span><span class="ac"></span></div>
+          <div class="ar uk"><span class="ak">UQ</span><span class="an">hr_email</span><span class="at">VARCHAR(100) UNIQUE</span><span class="ac">One HR per company</span></div>
+        </div>
+      </div>
+
+      <div class="schema-block">
+        <div class="sh jobs-h"><span class="sn">Job_Postings</span><span class="st">Relationship Table</span></div>
+        <div class="sa">
+          <div class="ar pk"><span class="ak">PK</span><span class="an">job_id</span><span class="at">INT AUTO_INCREMENT</span><span class="ac"></span></div>
+          <div class="ar fk"><span class="ak">FK</span><span class="an">company_id</span><span class="at">INT</span><span class="ac">→ Companies(company_id)</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">role</span><span class="at">VARCHAR(100) NOT NULL</span><span class="ac"></span></div>
+          <div class="ar"><span class="ak"></span><span class="an">package_lpa</span><span class="at">DECIMAL(4,2)</span><span class="ac"></span></div>
+          <div class="ar chk"><span class="ak">CHK</span><span class="an">min_cgpa</span><span class="at">DECIMAL(3,2)</span><span class="ac">BETWEEN 0 AND 10</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">job_type</span><span class="at">VARCHAR(50)</span><span class="ac">Full-Time / Internship / Part-Time</span></div>
+        </div>
+      </div>
+
+      <div class="schema-block">
+        <div class="sh apps-h"><span class="sn">Applications</span><span class="st">Junction Table (Student ↔ Job)</span></div>
+        <div class="sa">
+          <div class="ar pk"><span class="ak">PK</span><span class="an">application_id</span><span class="at">INT AUTO_INCREMENT</span><span class="ac"></span></div>
+          <div class="ar fk"><span class="ak">FK</span><span class="an">student_id</span><span class="at">INT</span><span class="ac">→ Students(student_id)</span></div>
+          <div class="ar fk"><span class="ak">FK</span><span class="an">job_id</span><span class="at">INT</span><span class="ac">→ Job_Postings(job_id)</span></div>
+          <div class="ar def"><span class="ak">DEF</span><span class="an">status</span><span class="at">VARCHAR(50)</span><span class="ac">DEFAULT 'Applied'</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">applied_date</span><span class="at">DATE</span><span class="ac"></span></div>
+        </div>
+      </div>
+
+      <div class="schema-block">
+        <div class="sh interviews-h"><span class="sn">Interviews</span><span class="st">Weak Entity</span></div>
+        <div class="sa">
+          <div class="ar pk"><span class="ak">PK</span><span class="an">interview_id</span><span class="at">INT AUTO_INCREMENT</span><span class="ac"></span></div>
+          <div class="ar fk"><span class="ak">FK</span><span class="an">application_id</span><span class="at">INT</span><span class="ac">→ Applications(application_id)</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">interview_date</span><span class="at">DATE</span><span class="ac"></span></div>
+          <div class="ar"><span class="ak"></span><span class="an">interview_mode</span><span class="at">VARCHAR(50)</span><span class="ac">Online / Offline</span></div>
+          <div class="ar"><span class="ak"></span><span class="an">result</span><span class="at">VARCHAR(50)</span><span class="ac">Selected / Rejected</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 5. NORMALIZATION ===== -->
+    <section class="sec-panel" id="normalization">
+      <div class="sec-hero">
+        <div class="sec-badge">05</div>
+        <h2>Normalization</h2>
+        <p class="sec-lead">Analysis of normal forms to eliminate redundancy and ensure data integrity</p>
+      </div>
+      <div class="norm-grid">
+        <div class="norm-card n1">
+          <div class="nbadge">1NF</div>
+          <h3>First Normal Form</h3>
+          <p class="nrule">All attributes must contain atomic values; no repeating groups.</p>
+          <div class="nchecks">
+            <div class="nci pass">✅ Each column holds a single atomic value</div>
+            <div class="nci pass">✅ Every table has a defined primary key</div>
+            <div class="nci pass">✅ No repeating groups or arrays exist in any column</div>
+            <div class="nci note">📝 <em>skills</em> uses comma-separated values — a design trade-off</div>
+          </div>
+          <div class="nverdict pass">✅ All tables satisfy 1NF</div>
+        </div>
+        <div class="norm-card n2">
+          <div class="nbadge">2NF</div>
+          <h3>Second Normal Form</h3>
+          <p class="nrule">Must be in 1NF. All non-key attributes must be fully dependent on the entire primary key.</p>
+          <div class="nchecks">
+            <div class="nci pass">✅ All primary keys are single-column (no composite PKs)</div>
+            <div class="nci pass">✅ No partial dependencies can exist with single-column PKs</div>
+            <div class="nci pass">✅ role, package_lpa fully depend only on job_id</div>
+            <div class="nci pass">✅ status, applied_date fully depend only on application_id</div>
+          </div>
+          <div class="nverdict pass">✅ All tables satisfy 2NF</div>
+        </div>
+        <div class="norm-card n3">
+          <div class="nbadge">3NF</div>
+          <h3>Third Normal Form</h3>
+          <p class="nrule">Must be in 2NF. No non-key attribute may transitively depend on the primary key.</p>
+          <div class="nchecks">
+            <div class="nci pass">✅ company_name is NOT stored in Job_Postings — only company_id (FK)</div>
+            <div class="nci pass">✅ Student details are NOT stored in Applications — only student_id (FK)</div>
+            <div class="nci pass">✅ Denormalized data is retrieved at query time via JOINs</div>
+            <div class="nci pass">✅ No A → B → C transitive dependency chain exists</div>
+          </div>
+          <div class="nverdict pass">✅ All tables satisfy 3NF</div>
+        </div>
+      </div>
+
+      <div class="card mt1">
+        <h3>Functional Dependencies Summary</h3>
+        <div class="fd-table">
+          <div class="fd-row fh"><span>Table</span><span>Functional Dependency</span><span>Type</span></div>
+          <div class="fd-row"><span>Students</span><span>student_id → name, email, branch, cgpa, graduation_year, skills, resume_link</span><span class="fdt">Full FD</span></div>
+          <div class="fd-row"><span>Companies</span><span>company_id → company_name, industry, location, hr_email</span><span class="fdt">Full FD</span></div>
+          <div class="fd-row"><span>Job_Postings</span><span>job_id → company_id, role, package_lpa, min_cgpa, job_type</span><span class="fdt">Full FD</span></div>
+          <div class="fd-row"><span>Applications</span><span>application_id → student_id, job_id, status, applied_date</span><span class="fdt">Full FD</span></div>
+          <div class="fd-row"><span>Interviews</span><span>interview_id → application_id, interview_date, interview_mode, result</span><span class="fdt">Full FD</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 6. SQL QUERIES ===== -->
+    <section class="sec-panel" id="sql-queries">
+      <div class="sec-hero">
+        <div class="sec-badge">06</div>
+        <h2>SQL Queries</h2>
+        <p class="sec-lead">Key SQL operations demonstrated in this project</p>
+      </div>
+      <div class="sql-grid">
+        <div class="sql-block">
+          <div class="sql-tag">DDL — CREATE TABLE</div>
+          <pre class="sql-code">CREATE TABLE Students(
+  student_id INT AUTO_INCREMENT PRIMARY KEY,
+  name       VARCHAR(50) NOT NULL,
+  email      VARCHAR(100) UNIQUE NOT NULL,
+  branch     VARCHAR(50) NOT NULL,
+  cgpa       DECIMAL(3,2) CHECK (cgpa BETWEEN 0 AND 10),
+  graduation_year INT NOT NULL,
+  skills     VARCHAR(200),
+  resume_link VARCHAR(200)
+);</pre>
+        </div>
+        <div class="sql-block">
+          <div class="sql-tag">DML — SELECT with JOIN</div>
+          <pre class="sql-code">SELECT s.name, c.company_name, j.role
+FROM Students s
+JOIN Applications a ON s.student_id = a.student_id
+JOIN Job_Postings j ON a.job_id = j.job_id
+JOIN Companies c   ON j.company_id = c.company_id;</pre>
+        </div>
+        <div class="sql-block">
+          <div class="sql-tag">DML — INSERT</div>
+          <pre class="sql-code">INSERT INTO Students(name,email,branch,cgpa,graduation_year)
+VALUES ('Vikas Kumar','vikas@gmail.com','CSE',8.1,2025);</pre>
+        </div>
+        <div class="sql-block">
+          <div class="sql-tag">DML — UPDATE</div>
+          <pre class="sql-code">UPDATE Students
+SET cgpa = 8.8
+WHERE student_id = 1;</pre>
+        </div>
+        <div class="sql-block">
+          <div class="sql-tag">DML — DELETE</div>
+          <pre class="sql-code">DELETE FROM Students
+WHERE student_id = 7;</pre>
+        </div>
+        <div class="sql-block">
+          <div class="sql-tag">Aggregate Functions</div>
+          <pre class="sql-code">SELECT AVG(cgpa)       AS Average_CGPA   FROM Students;
+SELECT COUNT(*)        AS Total_Students FROM Students;
+SELECT MAX(package_lpa) AS Highest_Package
+FROM Job_Postings;</pre>
+        </div>
+        <div class="sql-block">
+          <div class="sql-tag">GROUP BY &amp; HAVING</div>
+          <pre class="sql-code">SELECT branch, COUNT(student_id) AS Total_Students
+FROM Students
+GROUP BY branch
+HAVING COUNT(student_id) > 2;</pre>
+        </div>
+        <div class="sql-block">
+          <div class="sql-tag">Subquery</div>
+          <pre class="sql-code">-- Students with CGPA above average
+SELECT name FROM Students
+WHERE cgpa > (
+    SELECT AVG(cgpa) FROM Students
+);</pre>
+        </div>
+        <div class="sql-block">
+          <div class="sql-tag">Nested Query</div>
+          <pre class="sql-code">-- Students eligible for Google
+SELECT name FROM Students WHERE cgpa >= (
+  SELECT min_cgpa FROM Job_Postings
+  WHERE company_id = (
+    SELECT company_id FROM Companies
+    WHERE company_name = 'Google'
+  )
+);</pre>
+        </div>
+        <div class="sql-block">
+          <div class="sql-tag">Dashboard Stats</div>
+          <pre class="sql-code">SELECT
+  (SELECT COUNT(*) FROM Students)    AS total_students,
+  (SELECT COUNT(*) FROM Companies)   AS total_companies,
+  (SELECT COUNT(*) FROM Job_Postings) AS total_jobs,
+  (SELECT AVG(cgpa) FROM Students)   AS avg_cgpa,
+  (SELECT MAX(package_lpa) FROM Job_Postings) AS max_package;</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 7. PROJECT DEMO ===== -->
+    <section class="sec-panel" id="project-demo">
+      <div class="sec-hero">
+        <div class="sec-badge">07</div>
+        <h2>Project Demonstration</h2>
+        <p class="sec-lead">Live CRUD interface connected to the MySQL database via REST API</p>
+      </div>
+
+      <nav class="inner-nav">
+        <button class="ib active" data-itab="dashboard"><i data-lucide="bar-chart-2"></i> Dashboard</button>
+        <button class="ib" data-itab="students"><i data-lucide="users"></i> Students</button>
+        <button class="ib" data-itab="companies"><i data-lucide="building-2"></i> Companies</button>
+        <button class="ib" data-itab="jobs"><i data-lucide="briefcase"></i> Jobs</button>
+        <button class="ib" data-itab="applications"><i data-lucide="clipboard-list"></i> Applications</button>
+      </nav>
+
+      <!-- Dashboard -->
+      <div class="ipanel active" id="dashboard">
+        <div class="cards-grid">
+          <div class="stat-card"><div class="si" style="background:linear-gradient(135deg,#6366f1,#818cf8)"><i data-lucide="users"></i></div><div class="si-info"><p class="slabel">Total Students</p><p id="total-students" class="sval">-</p></div></div>
+          <div class="stat-card"><div class="si" style="background:linear-gradient(135deg,#22c55e,#4ade80)"><i data-lucide="building-2"></i></div><div class="si-info"><p class="slabel">Companies</p><p id="total-companies" class="sval">-</p></div></div>
+          <div class="stat-card"><div class="si" style="background:linear-gradient(135deg,#f97316,#fb923c)"><i data-lucide="briefcase"></i></div><div class="si-info"><p class="slabel">Job Postings</p><p id="total-jobs" class="sval">-</p></div></div>
+          <div class="stat-card"><div class="si" style="background:linear-gradient(135deg,#a855f7,#c084fc)"><i data-lucide="clipboard-list"></i></div><div class="si-info"><p class="slabel">Applications</p><p id="total-applications" class="sval">-</p></div></div>
+          <div class="stat-card"><div class="si" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8)"><i data-lucide="trending-up"></i></div><div class="si-info"><p class="slabel">Avg CGPA</p><p id="avg-cgpa" class="sval">-</p></div></div>
+          <div class="stat-card"><div class="si" style="background:linear-gradient(135deg,#ef4444,#f87171)"><i data-lucide="banknote"></i></div><div class="si-info"><p class="slabel">Highest Package (LPA)</p><p id="max-package" class="sval">-</p></div></div>
+        </div>
+      </div>
+
+      <!-- Students -->
+      <div class="ipanel" id="students">
+        <div class="ph"><h3>Student Profiles</h3><input type="text" id="student-search" placeholder="Search name, branch, skills…" class="srch"/></div>
+        <div class="card form-container">
+          <h4>Add New Student</h4>
+          <form id="add-student-form" class="data-form">
+            <div class="form-grid">
+              <input type="text"   id="student-name"   placeholder="Full Name" required/>
+              <input type="email"  id="student-email"  placeholder="Email"     required/>
+              <input type="text"   id="student-branch" placeholder="Branch"    required/>
+              <input type="number" id="student-cgpa"   placeholder="CGPA"  step="0.01" min="0" max="10" required/>
+              <input type="number" id="student-year"   placeholder="Graduation Year"   required/>
+              <input type="text"   id="student-skills" placeholder="Skills (comma separated)"/>
+              <input type="text"   id="student-resume" placeholder="Resume Link"/>
+            </div>
+            <button type="submit" class="btn-primary">+ Add Student</button>
+          </form>
+        </div>
+        <div class="table-wrapper">
+          <table><thead><tr><th>ID</th><th>Name</th><th>Email</th><th>Branch</th><th>CGPA</th><th>Year</th><th>Skills</th><th>Resume</th><th>Action</th></tr></thead>
+          <tbody id="students-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- Companies -->
+      <div class="ipanel" id="companies">
+        <div class="ph"><h3>Company Directory</h3><input type="text" id="company-search" placeholder="Search name, industry…" class="srch"/></div>
+        <div class="card form-container">
+          <h4>Add New Company</h4>
+          <form id="add-company-form" class="data-form">
+            <div class="form-grid">
+              <input type="text"  id="company-name"     placeholder="Company Name" required/>
+              <input type="text"  id="company-industry" placeholder="Industry"     required/>
+              <input type="text"  id="company-location" placeholder="Location"     required/>
+              <input type="email" id="company-hr-email" placeholder="HR Email"     required/>
+            </div>
+            <button type="submit" class="btn-primary">+ Add Company</button>
+          </form>
+        </div>
+        <div class="table-wrapper">
+          <table><thead><tr><th>ID</th><th>Company</th><th>Industry</th><th>Location</th><th>HR Email</th><th>Action</th></tr></thead>
+          <tbody id="companies-tbody"></tbody></table>
+        </div>
+      </div>
+
+      <!-- Jobs -->
+      <div class="ipanel" id="jobs">
+        <div class="ph"><h3>Job Postings &amp; Drives</h3><select id="job-company-filter"><option value="">All Companies</option></select></div>
+        <div class="card form-container">
+          <h4>Post New Job</h4>
+          <form id="add-job-form" class="data-form">
+            <div class="form-grid">
+              <select id="job-company-id" required><option value="">Select Company</option></select>
+              <input type="text"   id="job-role"     placeholder="Role / Job Title" required/>
+              <input type="number" id="job-package"  placeholder="Package (LPA)" step="0.01" required/>
+              <input type="number" id="job-min-cgpa" placeholder="Min CGPA" step="0.01" min="0" max="10" required/>
+              <select id="job-type" required>
+                <option value="Full-Time">Full-Time</option>
+                <option value="Internship">Internship</option>
+                <option value="Part-Time">Part-Time</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-primary">+ Post Job</button>
+          </form>
+        </div>
+        <div class="jobs-split">
+          <div class="table-wrapper">
+            <table><thead><tr><th>ID</th><th>Company</th><th>Role</th><th>LPA</th><th>Min CGPA</th><th>Type</th><th>Eligible</th><th>Action</th></tr></thead>
+            <tbody id="jobs-tbody"></tbody></table>
+          </div>
+          <div class="card">
+            <h4>Eligible Students</h4>
+            <p class="hint">Click "View" on a job row.</p>
+            <div class="table-wrapper"><table><thead><tr><th>Student</th><th>Branch</th><th>CGPA</th></tr></thead><tbody id="eligible-students-tbody"></tbody></table></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Applications -->
+      <div class="ipanel" id="applications">
+        <div class="ph"><h3>Application Tracking</h3>
+          <div class="filter-row">
+            <select id="application-student-filter"><option value="">Filter by Student</option></select>
+            <select id="application-status-filter">
+              <option value="">All Statuses</option>
+              <option value="Applied">Applied</option><option value="Shortlisted">Shortlisted</option>
+              <option value="Interviewed">Interviewed</option><option value="Offered">Offered</option><option value="Rejected">Rejected</option>
+            </select>
+          </div>
+        </div>
+        <div class="card form-container">
+          <h4>Add Application</h4>
+          <form id="add-application-form" class="data-form">
+            <div class="form-grid">
+              <select id="app-student-id" required><option value="">Select Student</option></select>
+              <select id="app-job-id"     required><option value="">Select Job</option></select>
+              <select id="app-status" required>
+                <option value="Applied">Applied</option><option value="Shortlisted">Shortlisted</option>
+                <option value="Interviewed">Interviewed</option><option value="Offered">Offered</option><option value="Rejected">Rejected</option>
+              </select>
+              <input type="date" id="app-date" required/>
+            </div>
+            <button type="submit" class="btn-primary">+ Add Application</button>
+          </form>
+        </div>
+        <div class="jobs-split">
+          <div class="table-wrapper">
+            <table><thead><tr><th>ID</th><th>Student</th><th>Company</th><th>Role</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+            <tbody id="applications-tbody"></tbody></table>
+          </div>
+          <div class="card">
+            <h4>Interview Schedule &amp; Results</h4>
+            <div class="table-wrapper"><table><thead><tr><th>Student</th><th>Company</th><th>Role</th><th>Date</th><th>Mode</th><th>Result</th></tr></thead><tbody id="interviews-tbody"></tbody></table></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== 8. SELF-LEARNING ===== -->
+    <section class="sec-panel" id="self-learning">
+      <div class="sec-hero">
+        <div class="sec-badge">08</div>
+        <h2>Self-Learning Beyond Classroom</h2>
+        <p class="sec-lead">Technologies and concepts explored independently to complete this project</p>
+      </div>
+      <div class="cg-2">
+        <div class="card learn-card"><div class="licon" style="background:#dcfce7;color:#16a34a"><i data-lucide="server"></i></div><div><h3>Node.js &amp; Express.js</h3><p>Built a REST API server from scratch — routing, middleware, static file serving, and error handling. Express was not part of our syllabus.</p><div class="ttags"><span class="ttag">REST API</span><span class="ttag">Routing</span><span class="ttag">Middleware</span></div></div></div>
+        <div class="card learn-card"><div class="licon" style="background:#dbeafe;color:#1d4ed8"><i data-lucide="database"></i></div><div><h3>MySQL2 Driver (npm)</h3><p>Used the <code>mysql2</code> package to connect Node.js with MySQL, handle async queries using callbacks, and manage connection pooling.</p><div class="ttags"><span class="ttag">mysql2</span><span class="ttag">Async Queries</span></div></div></div>
+        <div class="card learn-card"><div class="licon" style="background:#fef3c7;color:#d97706"><i data-lucide="shield"></i></div><div><h3>CORS &amp; Body-Parser</h3><p>Learned how Cross-Origin Resource Sharing works and why it is needed when the frontend and backend are on different origins.</p><div class="ttags"><span class="ttag">CORS</span><span class="ttag">JSON Parsing</span></div></div></div>
+        <div class="card learn-card"><div class="licon" style="background:#fce7f3;color:#be185d"><i data-lucide="globe"></i></div><div><h3>Frontend Fetch API</h3><p>Used the browser's native <code>fetch()</code> to make GET, POST, and DELETE requests to the backend API without any external libraries.</p><div class="ttags"><span class="ttag">fetch()</span><span class="ttag">async/await</span><span class="ttag">JSON</span></div></div></div>
+        <div class="card learn-card"><div class="licon" style="background:#ede9fe;color:#7c3aed"><i data-lucide="layout"></i></div><div><h3>Dynamic DOM Manipulation</h3><p>Built a fully dynamic UI using vanilla JavaScript — rendering tables, forms, filters, and stat cards without any frontend framework.</p><div class="ttags"><span class="ttag">DOM API</span><span class="ttag">Event Listeners</span></div></div></div>
+        <div class="card learn-card"><div class="licon" style="background:#fff7ed;color:#ea580c"><i data-lucide="git-merge"></i></div><div><h3>SQL JOINs &amp; Subqueries</h3><p>Applied multi-table JOINs and nested subqueries in real-world scenarios — e.g., fetching application data joined across 4 tables simultaneously.</p><div class="ttags"><span class="ttag">JOIN</span><span class="ttag">Subquery</span><span class="ttag">Aggregate</span></div></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 9. LEARNINGS ===== -->
+    <section class="sec-panel" id="learnings">
+      <div class="sec-hero">
+        <div class="sec-badge">09</div>
+        <h2>Learning from the Project</h2>
+        <p class="sec-lead">Key insights gained by building and deploying this system end-to-end</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-num">01</div><div class="tl-content"><h3>Referential Integrity is Non-Negotiable</h3><p>We learned first-hand why foreign key constraints matter — attempting to delete a company that has jobs linked to it throws a referential integrity error. This enforces data safety automatically.</p></div></div>
+        <div class="tl-item"><div class="tl-num">02</div><div class="tl-content"><h3>Normalisation Prevents Real Problems</h3><p>By separating company info from job postings, we ensured a company's name update propagates everywhere automatically — there's no stale data to fix manually.</p></div></div>
+        <div class="tl-item"><div class="tl-num">03</div><div class="tl-content"><h3>ER Diagrams Are Planning Tools</h3><p>Designing the ER diagram before writing any code helped us identify the Applications table as a junction entity and avoid incorrect table structures.</p></div></div>
+        <div class="tl-item"><div class="tl-num">04</div><div class="tl-content"><h3>JOINs Bring Data to Life</h3><p>A single well-written JOIN query across Students → Applications → Job_Postings → Companies can replace four separate queries and four client-side merge operations.</p></div></div>
+        <div class="tl-item"><div class="tl-num">05</div><div class="tl-content"><h3>API Design Affects Frontend Complexity</h3><p>A poorly designed API response forces the frontend to do expensive look-up work. Good backend JOINs return complete data and make the frontend simple and fast.</p></div></div>
+        <div class="tl-item"><div class="tl-num">06</div><div class="tl-content"><h3>CHECK Constraints Are Underused</h3><p>Using CHECK (cgpa BETWEEN 0 AND 10) at the database level eliminates the need for this validation in both backend and frontend — one point of truth.</p></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 10. CHALLENGES ===== -->
+    <section class="sec-panel" id="challenges">
+      <div class="sec-hero">
+        <div class="sec-badge">10</div>
+        <h2>Challenges Faced</h2>
+        <p class="sec-lead">Obstacles encountered during development and how we overcame them</p>
+      </div>
+      <div class="cg-2">
+        <div class="card challenge-card"><div class="ch-num">01</div><h3>Foreign Key Delete Errors</h3><p><strong>Problem:</strong> Deleting a student who has active applications caused a referential integrity violation.</p><p><strong>Solution:</strong> We handle these errors gracefully in the API and inform the user to delete linked applications first.</p></div>
+        <div class="card challenge-card"><div class="ch-num">02</div><h3>Syncing Frontend Dropdowns</h3><p><strong>Problem:</strong> After adding a new company, the "Select Company" dropdown in the job form did not update automatically.</p><p><strong>Solution:</strong> We call <code>loadAllData()</code> after every POST operation, which re-fetches and re-renders all dropdowns.</p></div>
+        <div class="card challenge-card"><div class="ch-num">03</div><h3>CORS Error on First Run</h3><p><strong>Problem:</strong> Browser blocked fetch requests from frontend (port 5500) to backend (port 3000) due to CORS policy.</p><p><strong>Solution:</strong> Added the <code>cors</code> middleware to Express and served the frontend as a static directory from the same port.</p></div>
+        <div class="card challenge-card"><div class="ch-num">04</div><h3>Designing the ER Diagram</h3><p><strong>Problem:</strong> Determining the correct cardinality between Applications and Interviews (1:1 vs 1:N) was initially unclear.</p><p><strong>Solution:</strong> Through analysis of real placement scenarios we confirmed one application should yield at most one interview record in our scope.</p></div>
+        <div class="card challenge-card"><div class="ch-num">05</div><h3>MySQL Connection from Node.js</h3><p><strong>Problem:</strong> Initial connection attempts to MySQL failed due to authentication plugin mismatch (<code>caching_sha2_password</code> vs <code>mysql_native_password</code>).</p><p><strong>Solution:</strong> Updated MySQL user authentication method using ALTER USER command in MySQL Workbench.</p></div>
+        <div class="card challenge-card"><div class="ch-num">06</div><h3>Keeping Data Consistent Across Tabs</h3><p><strong>Problem:</strong> Adding a student in the Students tab did not update the Applications tab dropdown until page refresh.</p><p><strong>Solution:</strong> Centralised all state into module-level arrays and re-render all panels after every data mutation.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== 11. CONCLUSION ===== -->
+    <section class="sec-panel" id="conclusion">
+      <div class="sec-hero">
+        <div class="sec-badge">11</div>
+        <h2>Conclusion</h2>
+        <p class="sec-lead">What we built, what we achieved, and the way forward</p>
+      </div>
+      <div class="conclusion-hero card">
+        <div class="conc-icon"><i data-lucide="graduation-cap"></i></div>
+        <h3>Project Summary</h3>
+        <p>The <strong>University Campus Placement &amp; Internship Portal</strong> is a fully functional, end-to-end web application backed by a normalised MySQL relational database. It demonstrates the real-world application of core DBMS concepts including entity-relationship modelling, schema design, normalisation up to 3NF, SQL DDL/DML operations, JOINs, subqueries, and aggregate functions.</p>
+      </div>
+      <div class="cg-3 mt1">
+        <div class="card conc-card"><div class="cico"><i data-lucide="database"></i></div><h3>Database</h3><p>5 normalised tables, 3NF compliant, with proper PK/FK constraints, CHECK constraints, and default values.</p></div>
+        <div class="card conc-card"><div class="cico"><i data-lucide="server"></i></div><h3>Backend API</h3><p>10+ RESTful endpoints built with Node.js and Express.js serving live CRUD operations over MySQL.</p></div>
+        <div class="card conc-card"><div class="cico"><i data-lucide="monitor"></i></div><h3>Frontend</h3><p>Single-page app with 11 documented sections and a live demo panel — built with pure HTML, CSS, and JavaScript.</p></div>
+      </div>
+      <div class="card mt1 conc-achieve">
+        <h3>📌 Key Achievements</h3>
+        <div class="achieve-grid">
+          <div class="ach-item">Designed complete ER Diagram with 5 entities</div>
+          <div class="ach-item">Schema normalised to 3NF</div>
+          <div class="ach-item">10+ SQL queries (DDL, DML, Joins, Subqueries)</div>
+          <div class="ach-item">RESTful API with 10 endpoints</div>
+          <div class="ach-item">Live CRUD demo — Add, View, Delete records</div>
+          <div class="ach-item">Foreign key referential integrity enforced</div>
+          <div class="ach-item">Eligible student filter using subquery logic</div>
+          <div class="ach-item">Real-time dashboard with stats from DB</div>
+        </div>
+      </div>
+      <div class="card mt1">
+        <h3>Future Scope</h3>
+        <ul class="slist">
+          <li>Add student login and authentication system</li>
+          <li>Email notifications when application status changes</li>
+          <li>Analytics dashboard with charts (placement rate by branch, avg package trends)</li>
+          <li>Admin role with full database management capabilities</li>
+          <li>Export data to PDF/Excel for coordinator reports</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="app-footer">
+    <p>DBMS Project — University Campus Placement &amp; Internship Portal &nbsp;|&nbsp; MySQL · Node.js · Express · Vanilla JS</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
